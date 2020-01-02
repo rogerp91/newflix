@@ -29,7 +29,7 @@ jobs:
       script: ./gradlew common:lint
       script: ./gradlew common:detekt
       script: ./gradlew common:lintKotlin
-    - stage: feature-tv
+    - stage: feature-movie
       script: ./gradlew feature-movie:test
       script: ./gradlew feature-movie:assembleDebug
       script: ./gradlew feature-movie:lint
@@ -45,4 +45,4 @@ script:
   - ./gradlew jacocoTestReport
   - bundle exec danger
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t e61b4cb8-f9c9-4a19-babd-23237e0ef833

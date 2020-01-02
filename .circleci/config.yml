@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Send coverage
-          command: bash <(curl -s https://codecov.io/bash)
+          command: bash <(curl -s https://codecov.io/bash) -t e61b4cb8-f9c9-4a19-babd-23237e0ef833
   danger:
     working_directory: ~/Newflix
     docker:
@@ -28,7 +28,7 @@ deployment:
   coverage:
     branch: [master]
     commands:
-      - bash <(curl -s https://codecov.io/bash)
+      - bash <(curl -s https://codecov.io/bash) -t e61b4cb8-f9c9-4a19-babd-23237e0ef833
 workflows:
   version: 2
   build_and_test:
