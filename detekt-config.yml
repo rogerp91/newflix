@@ -58,10 +58,10 @@ comments:
     endOfSentenceFormat: ([.?!][ \t\n\r\f<])|([.?!]$)
   UndocumentedPublicClass:
     active: false
-    searchInNestedClass: true
-    searchInInnerClass: true
-    searchInInnerObject: true
-    searchInInnerInterface: true
+    searchInNestedClass: false
+    searchInInnerClass: false
+    searchInInnerObject: false
+    searchInInnerInterface: false
   UndocumentedPublicFunction:
     active: false
 
