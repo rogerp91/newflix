@@ -1,2 +1,2 @@
-include ':app', ':common', ':library-ui', ':feature-movie'
+include ':app', ':common', ':library-ui', ':feature-movie', ':libary-rest-client'
 rootProject.name='Newflix'

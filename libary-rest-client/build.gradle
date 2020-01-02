@@ -4,13 +4,11 @@ apply from: '../plugin.gradle'
 android {
     compileSdkVersion maxApiLevel.toInteger()
     buildToolsVersion androidBuildToolsVersion
-
     defaultConfig {
         minSdkVersion minApiLevel
         targetSdkVersion maxApiLevel
         versionCode appVersionCode.toInteger()
         versionName appVersionName
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -20,8 +18,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            testCoverageEnabled true
+        debug{
             minifyEnabled false
             useProguard false
             shrinkResources false
@@ -31,16 +28,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    resourcePrefix "common_"
+    resourcePrefix "rest_"
 }
 
 dependencies {
-    implementation project(path: ':libary-rest-client')
-
     implementation kotlin.std
-    implementation android.appCompat
-    implementation android.corektx
-    implementation android.ui.constraint
+    implementation network.retrofitGsonConverter
+    implementation network.retrofitRxJavaAdapter
+    implementation network.okHttp3
+    implementation network.okHttp3Logging
+    implementation common.gson
 
     implementation common.di.dagger
     implementation common.di.daggerAndroid
@@ -49,49 +46,10 @@ dependencies {
     kapt common.di.daggerAndroidProccessor
     kapt common.di.daggerSupport
 
-    implementation android.db.roomRuntime
-    kapt android.db.roomCompiler
-
-    implementation rx.java
-    implementation network.retrofitGsonConverter
-
     testImplementation test.junit
     testImplementation test.mockito
     testImplementation test.mockitoKotlin
     testImplementation test.robolectric
-    testImplementation test.network.mockWebServer
     androidTestImplementation test.extjunit
     androidTestImplementation test.espresso
-
-    kapt javax.values()
-}
-
-detekt {
-    toolVersion = "$gradleBuildDetektVersion"
-    input = files("src")
-    config = files("$rootDir/detekt.yml")
-    filters = ".*/resources/.*,.*/build/.*"
-    reports {
-        xml {
-            enabled = true
-            destination = file("$project.rootDir/build/reports/detekt_report.xml")
-        }
-        html {
-            enabled = true
-            destination = file("$project.rootDir/build/reports/detekt_report.html")
-        }
-    }
-}
-
-kotlinter {
-    ignoreFailures = false
-    experimentalRules = false
-}
-
-jacoco {
-    toolVersion = "0.8.4"
-}
-
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
 }
