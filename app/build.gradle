@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply from: '../plugin.gradle'
+
+android {
+    compileSdkVersion maxApiLevel.toInteger()
+    buildToolsVersion androidBuildToolsVersion
+    defaultConfig {
+        applicationId "com.github.rogerp91.newflix"
+        minSdkVersion minApiLevel
+        targetSdkVersion maxApiLevel
+        versionCode appVersionCode.toInteger()
+        versionName appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation project(path: ':common')
+    implementation project(path: ':library-ui')
+    implementation project(path: ':feature-movie')
+
+    implementation kotlin.std
+    implementation android.appCompat
+    implementation android.corektx
+    implementation android.ui.constraint
+
+    implementation android.nav.fragment
+    implementation android.nav.ui
+
+    testImplementation test.junit
+    testImplementation test.mockito
+    testImplementation test.mockitoKotlin
+    testImplementation test.robolectric
+    androidTestImplementation test.extjunit
+    androidTestImplementation test.espresso
+
+    kapt javax.values()
+}

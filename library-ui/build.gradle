@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply from: '../plugin.gradle'
+
+android {
+    compileSdkVersion maxApiLevel.toInteger()
+    buildToolsVersion androidBuildToolsVersion
+    defaultConfig {
+        minSdkVersion minApiLevel
+        targetSdkVersion maxApiLevel
+        versionCode appVersionCode.toInteger()
+        versionName appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    resourcePrefix "ui_"
+}
+
+dependencies {
+    implementation project(path: ':common')
+    implementation kotlin.std
+    implementation android.appCompat
+    implementation android.corektx
+    implementation android.ui.constraint
+
+    testImplementation test.junit
+    testImplementation test.mockito
+    testImplementation test.mockitoKotlin
+    testImplementation test.robolectric
+    androidTestImplementation test.extjunit
+    androidTestImplementation test.espresso
+}

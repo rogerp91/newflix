@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply from: '../plugin.gradle'
+
+android {
+    compileSdkVersion maxApiLevel.toInteger()
+    buildToolsVersion androidBuildToolsVersion
+
+    defaultConfig {
+        minSdkVersion minApiLevel
+        targetSdkVersion maxApiLevel
+        versionCode appVersionCode.toInteger()
+        versionName appVersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    resourcePrefix "common_"
+}
+
+dependencies {
+    implementation kotlin.std
+    implementation android.appCompat
+    implementation android.corektx
+    implementation android.ui.constraint
+
+    implementation common.di.dagger
+    implementation common.di.daggerAndroid
+    implementation common.di.daggerAnddropidSupport
+    kapt common.di.daggerCompiler
+    kapt common.di.daggerAndroidProccessor
+    kapt common.di.daggerSupport
+
+    implementation android.db.roomRuntime
+    kapt android.db.roomCompiler
+
+    implementation rx.java
+    testImplementation test.junit
+    testImplementation test.mockito
+    testImplementation test.mockitoKotlin
+    testImplementation test.robolectric
+    androidTestImplementation test.extjunit
+    androidTestImplementation test.espresso
+
+    kapt javax.values()
+}
+
+detekt {
+    toolVersion = "$gradleBuildDetektVersion"
+    input = files("src")
+    config = files("$rootDir/detekt-config.yml")
+    filters = ".*/resources/.*,.*/build/.*"
+    reports {
+        xml {
+            enabled = true
+            destination = file("$project.rootDir/build/reports/detekt_report.xml")
+        }
+        html {
+            enabled = true
+            destination = file("$project.rootDir/build/reports/detekt_report.html")
+        }
+    }
+}
+
+kotlinter {
+    ignoreFailures = false
+    experimentalRules = false
+}
+
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}

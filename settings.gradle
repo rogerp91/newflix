@@ -1,0 +1,2 @@
+include ':app', ':common', ':library-ui', ':feature-movie'
+rootProject.name='Newflix'
