@@ -61,7 +61,7 @@ dependencies {
 detekt {
     toolVersion = "$gradleBuildDetektVersion"
     input = files("src")
-    config = files("$rootDir/detekt-config.yml")
+    config = files("$rootDir/detekt.yml")
     filters = ".*/resources/.*,.*/build/.*"
     reports {
         xml {
