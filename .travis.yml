@@ -1,0 +1,48 @@
+language: android
+sudo: required
+jdk: oraclejdk8
+env:
+  global:
+    - ANDROID_TARGET=android-29
+    - ANDROID_ABI=armeabi-v7a
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-29.0.2
+    - extra-android-m2repository
+    - $ANDROID_TARGET
+    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+jobs:
+  include:
+    - stage: common
+      script: ./gradlew common:assembleDebug
+      script: ./gradlew common:test
+      script: ./gradlew common:lint
+      script: ./gradlew common:detekt
+      script: ./gradlew common:lintKotlin
+    - stage: feature-tv
+      script: ./gradlew feature-movie:test
+      script: ./gradlew feature-movie:assembleDebug
+      script: ./gradlew feature-movie:lint
+      script: ./gradlew feature-movie:detekt
+      script: ./gradlew feature-movie:lintKotlin
+    - stage: library-ui
+      script: ./gradlew library-ui:test
+      script: ./gradlew library-ui:assembleDebug
+      script: ./gradlew library-ui:lint
+      script: ./gradlew library-ui:detekt
+      script: ./gradlew library-ui:lintKotlin
+script:
+  - ./gradlew jacocoTestReport
+  - bundle exec danger
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
