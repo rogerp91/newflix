@@ -1,6 +1,8 @@
 package com.github.rogerp91.common.util.test
 
 import com.github.rogerp91.common.data.source.local.entity.ResultEntity
+import com.github.rogerp91.common.data.source.remote.dto.MoviesDto
+import com.github.rogerp91.common.data.source.remote.dto.ResultDto
 
 object ResultEntityTest {
 
@@ -33,4 +35,27 @@ object ResultEntityTest {
             "", ""
         )
     }
+
+    fun getMoviesResult() = MoviesDto(1, 1, 1, listOf(getStubResultDto(), getStubResultDto2()))
+
+    fun getStubResultDto(): ResultDto {
+        return ResultDto(
+            541.169, 569, false,
+            "/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg", 419704,
+            false, "/p3TCqUDoVsrIm8fHK9KOTfWnDjZ.jpg",
+            "en", "Ad Astra", "Ad Astra", 6.0,
+            "The near future", "2019-09-17"
+        )
+    }
+
+    fun getStubResultDto2(): ResultDto {
+        return ResultDto(
+            546.165, 600, true,
+            "/xBHvZcjRiWyobQ9kxBhO6BdtwRI.jpg", 419707,
+            false, "/p3TCqUDoerIm8fHK9KOTfWnDjZ.jpg",
+            "en", "New Avenge", "New Avenger", 8.0,
+            "The near future", "2019-09-10"
+        )
+    }
+
 }

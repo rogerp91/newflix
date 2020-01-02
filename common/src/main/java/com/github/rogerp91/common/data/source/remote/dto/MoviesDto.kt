@@ -4,5 +4,5 @@ data class MoviesDto(
     private val page: Int,
     private val totalResults: Int,
     private val totalPages: Int,
-    private val results: List<ResultDto>
+    val results: List<ResultDto>
 )

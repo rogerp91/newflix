@@ -16,5 +16,4 @@ class MovieHttpLoggingInterceptor : Interceptor {
 
         return chain.proceed(request)
     }
-
 }

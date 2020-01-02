@@ -22,6 +22,9 @@ android {
         }
         debug {
             testCoverageEnabled true
+            minifyEnabled false
+            useProguard false
+            shrinkResources false
         }
     }
     compileOptions {
@@ -32,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':libary-rest-client')
+
     implementation kotlin.std
     implementation android.appCompat
     implementation android.corektx
@@ -48,15 +53,17 @@ dependencies {
     kapt android.db.roomCompiler
 
     implementation rx.java
+    implementation network.retrofitGsonConverter
+
     testImplementation test.junit
     testImplementation test.mockito
     testImplementation test.mockitoKotlin
     testImplementation test.robolectric
+    testImplementation test.network.mockWebServer
     androidTestImplementation test.extjunit
     androidTestImplementation test.espresso
 
     kapt javax.values()
-    implementation project(path: ':libary-rest-client')
 }
 
 detekt {

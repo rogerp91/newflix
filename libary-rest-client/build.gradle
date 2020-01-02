@@ -18,6 +18,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug{
+            minifyEnabled false
+            useProguard false
+            shrinkResources false
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -27,7 +32,6 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':common')
     implementation kotlin.std
     implementation network.retrofitGsonConverter
     implementation network.retrofitRxJavaAdapter

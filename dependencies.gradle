@@ -44,7 +44,8 @@ ext {
             okHttp3              : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttp3Logging       : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             stetho               : "com.facebook.stetho:stetho:${stethoVersion}",
-            stethoOkHttp         : "com.facebook.stetho:stetho-okhttp3:${stethoOkHttpVersion}"
+            stethoOkHttp         : "com.facebook.stetho:stetho-okhttp3:${stethoOkHttpVersion}",
+            mockWebServer        : "com.squareup.okhttp3:mockwebserver:${mockWebServer}"
     ]
 
     common = [
@@ -62,12 +63,15 @@ ext {
     ]
 
     test = [
-            junit         : "junit:junit:${junitVersion}",
-            extjunit      : "androidx.test.ext:junit:${extJunitVersion}",
-            espresso      : "androidx.test.espresso:espresso-core:${espressoVersion}",
-            mockito       : "org.mockito:mockito-core:${mockitoVersion}",
-            mockitoKotlin : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
-            robolectric   : "org.robolectric:robolectric:${robolectricVersion}"
+            junit        : "junit:junit:${junitVersion}",
+            extjunit     : "androidx.test.ext:junit:${extJunitVersion}",
+            espresso     : "androidx.test.espresso:espresso-core:${espressoVersion}",
+            mockito      : "org.mockito:mockito-core:${mockitoVersion}",
+            mockitoKotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoKotlinVersion}",
+            robolectric  : "org.robolectric:robolectric:${robolectricVersion}",
+            network      : [
+                    mockWebServer: "com.squareup.okhttp3:mockwebserver:${mockWebServer}"
+            ]
     ]
 
     javax = [

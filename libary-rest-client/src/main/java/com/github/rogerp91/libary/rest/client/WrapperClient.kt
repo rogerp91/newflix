@@ -1,13 +1,12 @@
 package com.github.rogerp91.libary.rest.client
 
-import com.github.rogerp91.libary.rest.client.api.MoviesApi
 import retrofit2.Retrofit
-import javax.inject.Inject
 
-class WrapperClient(
-    @Inject
+open class WrapperClient(
     private val retrofit: Retrofit
 ) {
 
-    fun movie() = retrofit.create(MoviesApi::class.java)
+    fun <T> create(service: Class<T>): T {
+        return retrofit.create(service)
+    }
 }
