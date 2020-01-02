@@ -46,7 +46,6 @@ dependencies {
     implementation rx.android
 
     implementation android.db.roomRuntime
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt android.db.roomCompiler
 
     testImplementation test.junit
@@ -55,4 +54,5 @@ dependencies {
     testImplementation test.robolectric
     androidTestImplementation test.extjunit
     androidTestImplementation test.espresso
+    implementation project(path: ':libary-rest-client')
 }

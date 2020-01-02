@@ -35,6 +35,13 @@ dependencies {
     implementation network.okHttp3Logging
     implementation common.gson
 
+    implementation common.di.dagger
+    implementation common.di.daggerAndroid
+    implementation common.di.daggerAnddropidSupport
+    kapt common.di.daggerCompiler
+    kapt common.di.daggerAndroidProccessor
+    kapt common.di.daggerSupport
+
     testImplementation test.junit
     testImplementation test.mockito
     testImplementation test.mockitoKotlin
