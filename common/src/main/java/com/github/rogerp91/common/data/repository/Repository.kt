@@ -1,4 +1,4 @@
-package com.github.rogerp91.common.repository
+package com.github.rogerp91.common.data.repository
 
 import io.reactivex.Flowable
 import io.reactivex.Single

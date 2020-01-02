@@ -1,4 +1,4 @@
-package com.github.rogerp91.common.datasource
+package com.github.rogerp91.common.data.source
 
 import io.reactivex.Flowable
 
